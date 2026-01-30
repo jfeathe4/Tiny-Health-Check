@@ -1,4 +1,5 @@
 import { randomUUID } from 'crypto';
+import createError from 'http-errors';
 import { RegisteredUrl, UrlStatus } from '../models';
 
 // In-memory store for registered URLs using a Map for efficient lookups
@@ -11,26 +12,30 @@ const registeredUrls = new Map<string, RegisteredUrl>();
  * @throws An error if the URL is invalid or already registered.
  */
 export const registerUrl = (url: string): RegisteredUrl => {
+  let parsedUrl: URL;
+
   // Basic validation for a valid URL format
   try {
-    new URL(url);
+    parsedUrl = new URL(url);
   } catch (error) {
-    throw new Error('Invalid URL format.');
+    throw createError(400, 'Invalid URL format.');
   }
 
+  const normalizedUrl = parsedUrl.href;
+
   // Check if the URL is already registered
-  if (registeredUrls.has(url)) {
-    throw new Error('URL is already registered.');
+  if (registeredUrls.has(normalizedUrl)) {
+    throw createError(409, 'URL is already registered.');
   }
 
   // Create a new RegisteredUrl object
   const newUrlEntry: RegisteredUrl = {
     id: randomUUID(),
-    link: url,
+    link: normalizedUrl,
     status: UrlStatus.PENDING,
   };
 
-  registeredUrls.set(url, newUrlEntry);
+  registeredUrls.set(normalizedUrl, newUrlEntry);
   return newUrlEntry;
 };
 
@@ -54,7 +59,7 @@ export const updateUrl = (id: string, updates: Partial<RegisteredUrl>): Register
   const urlEntry = Array.from(registeredUrls.values()).find((entry) => entry.id === id);
 
   if (!urlEntry) {
-    throw new Error('URL not found.');
+    throw createError(404, 'URL not found.');
   }
 
   // Update the fields in the URL entry
@@ -78,7 +83,7 @@ export const updateUrlByLink = (url: string, updates: Partial<RegisteredUrl>): R
   const urlEntry = registeredUrls.get(url);
 
   if (!urlEntry) {
-    throw new Error('URL not found.');
+    throw createError(404, 'URL not found.');
   }
 
   // Update the fields in the URL entry

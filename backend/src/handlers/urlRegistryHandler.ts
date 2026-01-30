@@ -13,7 +13,6 @@ export const addUrlHandler = (req: Request, res: Response, next: NextFunction): 
     logger.info(`URL: ${url}`);
 
     if (!url) {
-      // If URL is not provided in the body, send a 400 error
       return next(new ErrorHandler(400, 'URL is required in the request body.'));
     }
 
@@ -32,7 +31,6 @@ export const addUrlHandler = (req: Request, res: Response, next: NextFunction): 
     // Pass any errors to the global error handler
     if (error instanceof Error) {
       logger.error(`Failed to register URL: ${error.message}`);
-      return next(new ErrorHandler(400, error.message));
     }
     next(error);
   }

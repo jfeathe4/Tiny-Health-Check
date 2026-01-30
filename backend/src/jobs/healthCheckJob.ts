@@ -70,5 +70,6 @@ export const startHealthCheckJob = () => {
   process.on('SIGINT', () => {
     logger.info('Stopping health check job...');
     job.stop();
+    process.exit(0);
   });
 };
