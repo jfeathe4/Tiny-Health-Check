@@ -1,5 +1,6 @@
 import createError from 'http-errors';
 import express from 'express';
+import cors from 'cors';
 // import path from 'path';
 import { config } from './config';
 // import cookieParser from 'cookie-parser';
@@ -11,8 +12,9 @@ import httpLogger from './middlewares/httpLogger';
 import router from './routes/index';
 import { startHealthCheckJob } from './jobs/healthCheckJob';
 
-const app: express.Application = express();
+const app = express();
 
+app.use(cors());
 app.use(httpLogger);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
