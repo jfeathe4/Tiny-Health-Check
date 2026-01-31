@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { Container, Box, Typography } from '@mui/material'
 import { AddUrlForm } from './components/AddUrl'
 import { UrlList } from './components/UrlList'
-import './App.css'
 
 function App() {
   const [refreshKey, setRefreshKey] = useState(0)

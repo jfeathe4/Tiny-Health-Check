@@ -1,15 +1,12 @@
 import createError from 'http-errors';
 import express from 'express';
 import cors from 'cors';
-// import path from 'path';
 import { config } from './config';
-// import cookieParser from 'cookie-parser';
 import http from 'http';
 
-// dotenv.config({ path: path.join(__dirname, '../.env') });
-import { handleError } from './helpers/error';
+import { handleError } from './utils/error';
 import httpLogger from './middlewares/httpLogger';
-import router from './routes/index';
+import router from './routes';
 import { startHealthCheckJob } from './jobs/healthCheckJob';
 
 const app = express();
@@ -18,7 +15,6 @@ app.use(cors());
 app.use(httpLogger);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// app.use(cookieParser());
 
 app.use('/', router);
 
