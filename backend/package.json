@@ -1,6 +1,7 @@
 {
   "name": "express-typescript-nodejs-boilerplate",
   "version": "1.0.0",
+  "private": true,
   "description": "Boilerplate for a NodeJs, Express, Typescript app",
   "main": "index.js",
   "scripts": {

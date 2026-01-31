@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { registerUrl, getAllUrls } from '../services/urlRegistry';
-import { ErrorHandler } from '../helpers/error';
+import { ErrorHandler } from '../utils/error';
 import logger from '../utils/logger';
 
 /**
@@ -8,7 +8,6 @@ import logger from '../utils/logger';
  */
 export const addUrlHandler = (req: Request, res: Response, next: NextFunction): void => {
   try {
-    logger.info(`URL: ${req.body.url}`);
     const { url } = req.body;
     logger.info(`URL: ${url}`);
 
