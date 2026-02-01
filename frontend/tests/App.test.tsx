@@ -5,7 +5,7 @@ import App from '../src/App';
 describe('App', () => {
   it('renders the main title', () => {
     render(<App />);
-    
+
     // Check if the main heading exists
     expect(screen.getByText('Tiny Health Check')).toBeInTheDocument();
   });

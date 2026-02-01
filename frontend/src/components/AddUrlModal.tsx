@@ -1,12 +1,6 @@
 import { useState } from 'react';
 import { isAxiosError } from 'axios';
-import {
-  Box,
-  Button,
-  TextField,
-  Alert,
-  CircularProgress,
-} from '@mui/material';
+import { Box, Button, TextField, Alert, CircularProgress } from '@mui/material';
 import { createRegisteredUrl } from '../api/registeredUrls';
 
 interface AddUrlFormProps {
@@ -32,7 +26,7 @@ export const AddUrlForm = ({ onSuccess }: AddUrlFormProps) => {
       setSuccessMessage('URL added successfully!');
       setUrl('');
       if (onSuccess) onSuccess();
-      
+
       // Clear success message after a brief delay
       setTimeout(() => {
         setSuccessMessage(null);
@@ -74,25 +68,12 @@ export const AddUrlForm = ({ onSuccess }: AddUrlFormProps) => {
               '& .MuiInputBase-input': { color: '#fff' },
             }}
           />
-          <Button
-            type="submit"
-            variant="contained"
-            disabled={loading || !url}
-            sx={{ minWidth: '100px', color: '#fff' }}
-          >
+          <Button type="submit" variant="contained" disabled={loading || !url} sx={{ minWidth: '100px', color: '#fff' }}>
             {loading ? <CircularProgress size={24} color="inherit" /> : 'Add'}
           </Button>
         </Box>
-        {error && (
-          <Alert severity="error">
-            {error}
-          </Alert>
-        )}
-        {successMessage && (
-          <Alert severity="success">
-            {successMessage}
-          </Alert>
-        )}
+        {error && <Alert severity="error">{error}</Alert>}
+        {successMessage && <Alert severity="success">{successMessage}</Alert>}
       </Box>
     </Box>
   );

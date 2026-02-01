@@ -1,18 +1,21 @@
-import { useState, useEffect } from 'react'
-import { Container, Box, Typography } from '@mui/material'
-import { AddUrlForm } from './components/AddUrl'
-import { UrlList } from './components/UrlList'
+import { useState, useEffect } from 'react';
+import { Container, Box, Typography } from '@mui/material';
+import { AddUrlForm } from './components/AddUrl';
+import { UrlList } from './components/UrlList';
 
 function App() {
-  const [refreshKey, setRefreshKey] = useState(0)
+  const [refreshKey, setRefreshKey] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setRefreshKey((prev) => prev + 1)
-    }, 5 * 60 * 1000) // 5 minutes
+    const interval = setInterval(
+      () => {
+        setRefreshKey((prev) => prev + 1);
+      },
+      5 * 60 * 1000,
+    ); // 5 minutes
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <Container maxWidth="lg">
@@ -28,7 +31,7 @@ function App() {
         <UrlList key={refreshKey} />
       </Box>
     </Container>
-  )
+  );
 }
 
-export default App
+export default App;

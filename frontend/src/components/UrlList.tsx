@@ -1,13 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-  Box,
-  CircularProgress,
-  Alert,
-  Card,
-  CardContent,
-  Typography,
-  Tooltip,
-} from '@mui/material';
+import { Box, CircularProgress, Alert, Card, CardContent, Typography, Tooltip } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { RegisteredUrl, UrlStatus } from '../models';
 import { getRegisteredUrls } from '../api/registeredUrls';
@@ -53,10 +45,7 @@ export const UrlList = () => {
       <Grid container spacing={3}>
         {urls.map((row) => (
           <Grid item xs={12} sm={6} md={4} key={row.id}>
-            <Card
-              elevation={3}
-              sx={{ height: '100%' }}
-            >
+            <Card elevation={3} sx={{ height: '100%' }}>
               <CardContent>
                 <Box display="flex" alignItems="center" mb={2}>
                   <Tooltip title={row.status}>
@@ -65,12 +54,7 @@ export const UrlList = () => {
                         width: 12,
                         height: 12,
                         borderRadius: '50%',
-                        bgcolor:
-                        row.status === UrlStatus.ONLINE
-                            ? 'success.main'
-                          : row.status === UrlStatus.OFFLINE
-                            ? 'error.main'
-                            : 'grey.500',
+                        bgcolor: row.status === UrlStatus.ONLINE ? 'success.main' : row.status === UrlStatus.OFFLINE ? 'error.main' : 'grey.500',
                         mr: 2,
                       }}
                     />
