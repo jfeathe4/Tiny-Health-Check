@@ -13,8 +13,6 @@ describe('URL Registry Service', () => {
   });
 
   it('should throw an error when registering a duplicate URL', () => {
-    // The URL was already registered in the previous test.
-    // Since the registry is in-memory and singleton, state persists.
     expect(() => {
       registerUrl(testUrl);
     }).toThrow('URL is already registered.');

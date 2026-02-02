@@ -11,7 +11,6 @@ export const UrlList = () => {
 
   const fetchUrls = async () => {
     try {
-      setLoading(true);
       const data = await getRegisteredUrls();
       console.log('UrlList fetched data:', data);
       setUrls(Array.isArray(data) ? data : []);

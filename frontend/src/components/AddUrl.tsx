@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, SyntheticEvent } from 'react';
 import { isAxiosError } from 'axios';
 import { Box, Paper, Button, TextField, Alert, CircularProgress } from '@mui/material';
 import { createRegisteredUrl } from '../api/registeredUrls';
@@ -13,7 +13,7 @@ export const AddUrlForm = ({ onSuccess }: AddUrlFormProps) => {
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
     if (!url) return;
 
