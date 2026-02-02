@@ -1,11 +1,11 @@
 {
-  "name": "express-typescript-nodejs-boilerplate",
+  "name": "tiny-health-check-backend",
   "version": "1.0.0",
   "private": true,
   "description": "Boilerplate for a NodeJs, Express, Typescript app",
   "main": "index.js",
   "scripts": {
-    "start": "node ./dist/app.js",
+    "start": "npm run build && node ./dist/app.js",
     "dev": "nodemon src/app.ts",
     "build": "tsc -p .",
     "prettier": "prettier --write src/**/*.ts",
