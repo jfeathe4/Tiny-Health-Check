@@ -29,7 +29,7 @@ describe('UrlList', () => {
   it('renders a list of URLs when data is fetched successfully', async () => {
     const mockData: RegisteredUrl[] = [
       { id: '1', link: 'https://google.com', status: UrlStatus.ONLINE, responseTime: 100 },
-      { id: '2', link: 'https://example.com', status: UrlStatus.OFFLINE  },
+      { id: '2', link: 'https://example.com', status: UrlStatus.OFFLINE },
     ];
     (getRegisteredUrls as Mock).mockResolvedValue(mockData);
 

@@ -34,10 +34,10 @@ describe('AddUrlForm', () => {
     const onSuccessMock = vi.fn();
 
     render(<AddUrlForm onSuccess={onSuccessMock} />);
-    
+
     const input = screen.getByLabelText(/Add New URL/i);
     fireEvent.change(input, { target: { value: 'https://success.com' } });
-    
+
     const button = screen.getByRole('button', { name: /Add/i });
     fireEvent.click(button);
 
@@ -47,7 +47,7 @@ describe('AddUrlForm', () => {
 
     expect(screen.getByText(/URL added successfully!/i)).toBeInTheDocument();
     expect(onSuccessMock).toHaveBeenCalled();
-    
+
     // Check if input is cleared
     expect((input as HTMLInputElement).value).toBe('');
   });
@@ -58,10 +58,10 @@ describe('AddUrlForm', () => {
     (createRegisteredUrl as Mock).mockRejectedValue(error);
 
     render(<AddUrlForm />);
-    
+
     const input = screen.getByLabelText(/Add New URL/i);
     fireEvent.change(input, { target: { value: 'https://duplicate.com' } });
-    
+
     const button = screen.getByRole('button', { name: /Add/i });
     fireEvent.click(button);
 
@@ -74,10 +74,10 @@ describe('AddUrlForm', () => {
     (createRegisteredUrl as Mock).mockRejectedValue(new Error('Network Error'));
 
     render(<AddUrlForm />);
-    
+
     const input = screen.getByLabelText(/Add New URL/i);
     fireEvent.change(input, { target: { value: 'https://fail.com' } });
-    
+
     const button = screen.getByRole('button', { name: /Add/i });
     fireEvent.click(button);
 
