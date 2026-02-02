@@ -2,21 +2,6 @@
 
 A micro-service ecosystem that monitors the availability of a specific set of websites.
 
-## Architecture
-
-This project is organized as a monorepo containing:
-
-- **Backend**: Node.js/TypeScript API and Worker.
-  - `src/services/health-check.ts`: Handles the background polling logic.
-  - `src/controllers`: REST API endpoints.
-  - `src/db`: SQLite connection and setup.
-- **Frontend**: React (Vite) Single Page Application.
-  - `src/components`: Reusable UI elements.
-  - `src/hooks`: Custom React hooks for data fetching.
-- **Infrastructure**:
-  - `docker-compose.yml`: Orchestrates the services.
-  - `.github/workflows`: CI pipeline.
-
 ## Prerequisites
 
 - Docker & Docker Compose
@@ -34,5 +19,25 @@ This project is organized as a monorepo containing:
 3. **Access the Dashboard**
    Open http://localhost:3000 in your browser.
 
-4. **API Documentation**
-   The API is available at http://localhost:4000.
+## Architecture
+
+This project is organized as a monorepo containing:
+
+- **Backend**: Node.js/TypeScript API and Worker.
+  - `src/config`: environment setup and configuration.
+  - `src/handlers`: HTTP request handlers.
+  - `src/jobs`: scheduled jobs and background tasks.
+  - `src/middlewares`: middleware components.
+  - `src/models`: objects and models.
+  - `src/services`: core services and business logic.
+  - `src/utils`: utility functions.
+  - `tests`: unit and integration tests.
+  - `routes`: external api routes.
+- **Frontend**: React (Vite) Single Page Application.
+  - `src/api`: API client.
+  - `src/components`: Reusable UI elements.
+  - `src/models`: objects and models.
+  - `tests`: Vitest component tests.
+- **Infrastructure**:
+  - `docker-compose.yml`: Orchestrates the services.
+  - `.github/workflows`: CI pipeline.

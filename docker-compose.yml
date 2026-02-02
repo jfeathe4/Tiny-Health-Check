@@ -3,10 +3,6 @@ services:
     build: ./backend
     ports:
       - "8000:8000"
-    # volumes:
-    #   # This maps the 'data' folder in your backend directory to /app/data in the container.
-    #   # Ensure your SQLite/JSON DB file is saved inside 'data/' in your code!
-    #   - ./backend/data:/app/data
     environment:
       - PORT=8000
 
@@ -16,5 +12,3 @@ services:
       - "3000:80"
     depends_on:
       - backend
-    # Note: The frontend connects to http://localhost:8000 from the user's browser,
-    # so no special internal networking is needed for the API URL.
