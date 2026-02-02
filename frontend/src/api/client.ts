@@ -10,18 +10,18 @@ export const apiClient = axios.create({
 });
 
 // Add logging interceptors
-apiClient.interceptors.request.use((request) => {
-  console.log('Starting Request', request);
-  return request;
-});
+// apiClient.interceptors.request.use((request) => {
+//   console.log('Starting Request', request);
+//   return request;
+// });
 
-apiClient.interceptors.response.use(
-  (response) => {
-    console.log('Response:', response);
-    return response;
-  },
-  (error) => {
-    console.error('Response Error:', error);
-    return Promise.reject(error);
-  },
-);
+// apiClient.interceptors.response.use(
+//   (response) => {
+//     console.log('Response:', response);
+//     return response;
+//   },
+//   (error) => {
+//     console.error('Response Error:', error);
+//     return Promise.reject(error);
+//   },
+// );

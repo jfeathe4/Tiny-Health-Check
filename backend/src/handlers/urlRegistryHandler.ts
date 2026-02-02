@@ -6,7 +6,7 @@ import logger from '../utils/logger';
 /**
  * Handler for POST /url requests to register a new URL.
  */
-export const addUrlHandler = (req: Request, res: Response, next: NextFunction): void => {
+export const addUrlHandler = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const { url } = req.body;
     logger.info(`URL: ${url}`);
@@ -16,7 +16,7 @@ export const addUrlHandler = (req: Request, res: Response, next: NextFunction): 
     }
 
     // Register the URL using the service
-    const registeredUrl = registerUrl(url);
+    const registeredUrl = await registerUrl(url);
 
     logger.info(`Successfully registered new URL: ${registeredUrl.link}`);
 
@@ -38,9 +38,9 @@ export const addUrlHandler = (req: Request, res: Response, next: NextFunction): 
 /**
  * Handler for GET /urls requests to retrieve all registered URLs.
  */
-export const getAllUrlsHandler = (_req: Request, res: Response, next: NextFunction): void => {
+export const getAllUrlsHandler = async (_req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const allUrls = getAllUrls();
+    const allUrls = await getAllUrls();
     res.status(200).json({
       status: 'success',
       results: allUrls.length,
