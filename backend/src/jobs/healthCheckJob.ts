@@ -32,15 +32,15 @@ const checkUrl = async (urlEntry: RegisteredUrl): Promise<void> => {
   };
 
   // Update the URL in our registry
-  updateUrlByLink(updatedEntry.link, updatedEntry);
+  await updateUrlByLink(updatedEntry.link, updatedEntry);
 };
 
 /**
  * The main task runner that gets all URLs and checks them.
  */
-const task = async () => {
+const healthCheck = async () => {
   logger.info('Running scheduled health check job...');
-  const allUrls = getAllUrls();
+  const allUrls = await getAllUrls();
 
   if (allUrls.length === 0) {
     logger.info('No URLs to check.');
@@ -51,7 +51,7 @@ const task = async () => {
   const checkPromises = allUrls.map(checkUrl);
 
   // Wait for all checks to complete
-  await Promise.all(checkPromises);
+  await Promise.allSettled(checkPromises);
   logger.info('Health check job finished.');
 };
 
@@ -60,9 +60,7 @@ const task = async () => {
  * The job is scheduled to run every minute.
  */
 export const startHealthCheckJob = () => {
-  // Schedule the task to run every minute.
-  // For more info on cron patterns: https://crontab.guru/
-  const job = cron.schedule('* * * * *', task);
+  const job = cron.schedule('* * * * *', healthCheck);
 
   logger.info('Health check job scheduled to run every minute.');
 

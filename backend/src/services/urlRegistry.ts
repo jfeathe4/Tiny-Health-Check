@@ -11,7 +11,7 @@ const registeredUrls = new Map<string, RegisteredUrl>();
  * @returns The newly created RegisteredUrl object.
  * @throws An error if the URL is invalid or already registered.
  */
-export const registerUrl = (url: string): RegisteredUrl => {
+export const registerUrl = async (url: string): Promise<RegisteredUrl> => {
   let parsedUrl: URL;
 
   // Basic validation for a valid URL format
@@ -43,7 +43,7 @@ export const registerUrl = (url: string): RegisteredUrl => {
  * Retrieves all registered URLs.
  * @returns An array of RegisteredUrl objects.
  */
-export const getAllUrls = (): RegisteredUrl[] => {
+export const getAllUrls = async (): Promise<RegisteredUrl[]> => {
   return Array.from(registeredUrls.values());
 };
 
@@ -54,7 +54,7 @@ export const getAllUrls = (): RegisteredUrl[] => {
  * @returns The updated RegisteredUrl object.
  * @throws An error if the URL ID is not found.
  */
-export const updateUrl = (id: string, updates: Partial<RegisteredUrl>): RegisteredUrl => {
+export const updateUrl = async (id: string, updates: Partial<RegisteredUrl>): Promise<RegisteredUrl> => {
   // Find the URL entry by ID
   const urlEntry = Array.from(registeredUrls.values()).find((entry) => entry.id === id);
 
@@ -78,7 +78,7 @@ export const updateUrl = (id: string, updates: Partial<RegisteredUrl>): Register
  * @returns The updated RegisteredUrl object.
  * @throws An error if the URL is not found.
  */
-export const updateUrlByLink = (url: string, updates: Partial<RegisteredUrl>): RegisteredUrl => {
+export const updateUrlByLink = async (url: string, updates: Partial<RegisteredUrl>): Promise<RegisteredUrl> => {
   // Check if the URL is already registered
   const urlEntry = registeredUrls.get(url);
 

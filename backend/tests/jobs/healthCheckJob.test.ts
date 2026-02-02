@@ -44,7 +44,7 @@ describe('Health Check Job', () => {
   });
 
   it('skips check if no URLs are registered', async () => {
-    (getAllUrls as jest.Mock).mockReturnValue([]);
+    (getAllUrls as jest.Mock).mockResolvedValue([]);
 
     startHealthCheckJob();
     await scheduledTask();
@@ -56,7 +56,7 @@ describe('Health Check Job', () => {
 
   it('updates status to ONLINE when fetch succeeds', async () => {
     const mockUrl = { link: 'https://google.com', id: '1', status: UrlStatus.PENDING };
-    (getAllUrls as jest.Mock).mockReturnValue([mockUrl]);
+    (getAllUrls as jest.Mock).mockResolvedValue([mockUrl]);
     (global.fetch as jest.Mock).mockResolvedValue({ ok: true });
 
     startHealthCheckJob();
@@ -75,7 +75,7 @@ describe('Health Check Job', () => {
 
   it('updates status to OFFLINE when fetch returns non-ok status', async () => {
     const mockUrl = { link: 'https://bing.com', id: '2', status: UrlStatus.PENDING };
-    (getAllUrls as jest.Mock).mockReturnValue([mockUrl]);
+    (getAllUrls as jest.Mock).mockResolvedValue([mockUrl]);
     (global.fetch as jest.Mock).mockResolvedValue({ ok: false });
 
     startHealthCheckJob();
@@ -91,7 +91,7 @@ describe('Health Check Job', () => {
 
   it('updates status to OFFLINE and logs warning on fetch error', async () => {
     const mockUrl = { link: 'https://error.com', id: '3', status: UrlStatus.PENDING };
-    (getAllUrls as jest.Mock).mockReturnValue([mockUrl]);
+    (getAllUrls as jest.Mock).mockResolvedValue([mockUrl]);
     (global.fetch as jest.Mock).mockRejectedValue(new Error('Timeout'));
 
     startHealthCheckJob();
